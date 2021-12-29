@@ -1,0 +1,11 @@
+
+<div *ngFor="let item of getSize(); let currentElementIndex = index">
+    <app-question-item
+     [customIndex]="currentElementIndex">
+    </app-question-item>
+    </div>
+<!-- <button type="button" (click)="printStuff()" >Submit your answer and continue </button>  -->
+<button type="button" routerLink="/evaluation" >Submit your answer and continue </button>
+
+
+     

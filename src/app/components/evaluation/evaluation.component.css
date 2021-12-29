@@ -1,0 +1,31 @@
+.right{
+
+    font-weight: bold;
+    background-color: green;
+
+}
+
+.false{
+
+    font-weight: bold;
+    background-color: red;
+
+}
+
+button {
+
+    height: 50px;
+    width: 200px;
+    color: white;
+    background-color: green;
+    border-style: double;
+    border-color: black;
+    margin-top: 50px;
+
+}
+.notanswered {
+
+    font-weight: bold;
+    background-color: yellow;
+
+}

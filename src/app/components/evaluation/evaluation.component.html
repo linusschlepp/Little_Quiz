@@ -1,0 +1,18 @@
+<div *ngIf="checkSize(); else elseBlock1" >
+<div *ngFor="let question of getSize(); let currentElementIndex = index">
+    <div *ngIf="evaluate(currentElementIndex); else elseBlock"> 
+        <p class="right">Congratulations, your {{currentElementIndex+1}}. answer was right</p>
+    </div>
+    <ng-template #elseBlock>
+    <p class="false">Im sorry, but your {{currentElementIndex+1}}. answer was wrong, Correct answer: {{getAnswer(currentElementIndex)}}</p>
+    </ng-template> 
+</div>
+</div>
+<ng-template #elseBlock1>
+    <p class="notanswered">Give answers pls!</p>
+</ng-template>
+<button type="button" 
+routerLink="/" 
+(click)="clear()">
+Start again
+</button>
