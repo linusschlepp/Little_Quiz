@@ -3,6 +3,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { QuestionComponent } from '../question/question.component';
 import { QUESTIONS } from 'src/app/mock-questions';
 
+
 @Component({
   selector: 'app-evaluation',
   templateUrl: './evaluation.component.html',
@@ -42,18 +43,25 @@ export class EvaluationComponent implements OnInit {
       checkIfEmpty(index: number): boolean{
 
        
+        
 
-        if(QuestionService.values[index] === "")
-            return false;
-
-
+        if(!QuestionService.values[index]){
+          console.log(index+"true");
           return true;
+        }
+           
+
+
+        console.log(index+"false")
+          return false;
 
       }
         
       getSize(){
 
-        return QuestionService.values
+      //  return QuestionService.values
+
+      return QUESTIONS
       }
     getAnswer(index: number): string{
      

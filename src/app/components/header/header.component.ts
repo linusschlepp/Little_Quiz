@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
 
   setLastVisited() {
 
-    QuestionService.lastVisited = "\\"
+    QuestionService.lastVisited = "//"
 
   }
 
