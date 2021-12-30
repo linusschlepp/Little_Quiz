@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-about',
@@ -10,6 +11,14 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getLastVisited(): string {
+
+    console.log(QuestionService.lastVisited)
+
+    return QuestionService.lastVisited;
+
   }
 
 }

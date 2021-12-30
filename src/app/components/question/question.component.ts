@@ -60,7 +60,12 @@ export class QuestionComponent implements OnInit {
 
   return QUESTIONS;
 
-}
+  }
+
+  setLastVisited(){
+
+    QuestionService.lastVisited = "\question"
+  }
   
 
 }

@@ -29,3 +29,10 @@ button {
     background-color: yellow;
 
 }
+
+.notansweredquestion {
+
+    font-weight: bold;
+    background-color: orange;
+
+}

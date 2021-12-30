@@ -38,21 +38,38 @@ export class EvaluationComponent implements OnInit {
         
         return true;
       }
+
+      checkIfEmpty(index: number): boolean{
+
+       
+
+        if(QuestionService.values[index] === "")
+            return false;
+
+
+          return true;
+
+      }
         
       getSize(){
 
         return QuestionService.values
       }
     getAnswer(index: number): string{
-
-      console.log(JSON.stringify(QuestionService.values[index]))
-      return JSON.stringify(QuestionService.values[index]).replace('{"answer":"','').replace('"}','')
+     
+     return JSON.stringify(QUESTIONS[index].answer)
 
     }
 
       clear(){
 
         QuestionService.values = []
+      } 
+
+      setLastVisited(){
+
+        QuestionService.lastVisited = "//evaluation"
+
       }
   }
 

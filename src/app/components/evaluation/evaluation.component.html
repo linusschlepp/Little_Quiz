@@ -4,15 +4,21 @@
         <p class="right">Congratulations, your {{currentElementIndex+1}}. answer was right</p>
     </div>
     <ng-template #elseBlock>
+        <div *ngIf="checkIfEmpty(currentElementIndex); else elseBlock2 ">
+<p class="notansweredquestion">You did not answer {{currentElementIndex}}. Question</p>
+</div> 
+            <ng-template #elseBlock2>
     <p class="false">Im sorry, but your {{currentElementIndex+1}}. answer was wrong, Correct answer: {{getAnswer(currentElementIndex)}}</p>
-    </ng-template> 
+</ng-template>     
+</ng-template> 
 </div>
 </div>
 <ng-template #elseBlock1>
-    <p class="notanswered">Give answers pls!</p>
+    <p class="notanswered">Pls enter answers!</p>
 </ng-template>
 <button type="button" 
 routerLink="/" 
 (click)="clear()">
-Start again
+Start over
 </button>
+{{setLastVisited()}}

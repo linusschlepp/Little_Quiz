@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { QuestionService } from 'src/app/services/question.service';
 
 
 
@@ -16,13 +17,15 @@ export class HeaderComponent implements OnInit {
   }
 
   hasRoute(route: String){
-    console.log("Route"+route);
-    if (this.router.url === route)
-      console.log("Yes")
-      else
-      console.log("no")
-    console.log("Eigentliche Route"+this.router.url)
+    
     return this.router.url === route;
+  }
+
+
+  setLastVisited() {
+
+    QuestionService.lastVisited = "\\"
+
   }
 
 }

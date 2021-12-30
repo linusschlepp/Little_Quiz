@@ -6,6 +6,7 @@ import { QUESTIONS } from '../mock-questions';
 })
 export class QuestionService {
   static values : string[] = []
+  static lastVisited : string
 
   constructor() { }
   

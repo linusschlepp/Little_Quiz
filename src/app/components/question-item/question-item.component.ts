@@ -15,9 +15,8 @@ export class QuestionItemComponent implements OnInit {
 
   @Input() 
   customIndex!: number;
- // @Output() 
- // var: any = (<HTMLInputElement>document.getElementById("linput")).value;
- @Input() list!: string[];
+  @Input() list!: string[];
+
 
  checkoutForm = this.formBuilder.group({
   answer: ''
@@ -59,8 +58,8 @@ export class QuestionItemComponent implements OnInit {
 
   onSubmit(): void{
       console.log("submitted")
-      // this.questionService.addToValue(this.checkoutForm.value)
-      QuestionService.values.push(this.checkoutForm.value)
+     
+      QuestionService.values[this.customIndex] = this.checkoutForm.value
   }
 
 }
