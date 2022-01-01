@@ -15,17 +15,14 @@ export class QuestionItemComponent implements OnInit {
 
   @Input() 
   customIndex!: number;
-  @Input() list!: string[];
+ 
 
 
  checkoutForm = this.formBuilder.group({
   answer: ''
 });
 
-  constructor(
-    private questionComponent: QuestionComponent,
-    private questionService: QuestionService,
-    private formBuilder : FormBuilder) { }
+  constructor(private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -37,26 +34,17 @@ export class QuestionItemComponent implements OnInit {
    
     }
 
-    
-  getInput() {
-    console.log((<HTMLInputElement>document.getElementById("linput")).value)
-    return (<HTMLInputElement>document.getElementById("linput")).value;
-
-  }
+  
 
   getValue(value: boolean): boolean{
 
     return value;
   }
 
-  pushToList(){
-    
-    this.list.push((<HTMLInputElement>document.getElementById("linput")).value);
-    console.log((<HTMLInputElement>document.getElementById("linput")).value)
 
-  }
 
   onSubmit(): void{
+
       console.log("submitted")
      
       QuestionService.values[this.customIndex] = this.checkoutForm.value

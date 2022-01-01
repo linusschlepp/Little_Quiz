@@ -46,20 +46,16 @@ export class EvaluationComponent implements OnInit {
         
 
         if(!QuestionService.values[index]){
-          console.log(index+"true");
           return true;
         }
            
 
-
-        console.log(index+"false")
           return false;
 
       }
         
       getSize(){
 
-      //  return QuestionService.values
 
       return QUESTIONS
       }

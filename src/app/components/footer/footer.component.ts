@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +11,21 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  
+  checkIfAbout(): boolean {
+
+    return !(QuestionService.lastVisited == '//about');
+
+  
+
+  }
+
+  getLastVisited(): string {
+
+    return QuestionService.lastVisited;
   }
 
 }

@@ -15,10 +15,12 @@ export class AboutComponent implements OnInit {
 
   getLastVisited(): string {
 
-    console.log(QuestionService.lastVisited)
-
     return QuestionService.lastVisited;
+  }
 
+  setLastVisited(){
+
+    QuestionService.lastVisited = "//about"
   }
 
 }
