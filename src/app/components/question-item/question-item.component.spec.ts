@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuestionService } from 'src/app/services/question.service';
 import { QuestionItemComponent } from './question-item.component';
 
 describe('QuestionItemComponent', () => {

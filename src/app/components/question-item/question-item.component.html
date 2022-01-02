@@ -2,8 +2,5 @@
 <p>{{displayQuestion(customIndex)}}</p>
 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
     <label for="lanswer">Enter your Answer please:  </label>
-    <input type ="text" placeholder="Enter your Answer" width="250px" height="50px" name="lanswer" id="linput" formControlName="answer" (change)="onSubmit()">
+    <input type="text" placeholder="Enter your Answer" width="250px" height="50px" name="lanswer" id="linput" formControlName="answer" (change)="onSubmit()">
 </form>
-
-
-

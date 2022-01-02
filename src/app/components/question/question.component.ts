@@ -10,8 +10,6 @@ import { QuestionService } from 'src/app/services/question.service';
 export class QuestionComponent implements OnInit {
 
    
-
-
   constructor() { 
     
   }

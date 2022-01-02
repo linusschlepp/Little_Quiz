@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { QUESTIONS } from 'src/app/mock-questions';
 import { QuestionService } from 'src/app/services/question.service';
-import { QuestionComponent } from '../question/question.component';
+
 
 
 @Component({
@@ -13,41 +13,32 @@ import { QuestionComponent } from '../question/question.component';
 })
 export class QuestionItemComponent implements OnInit {
 
-  @Input() 
+  @Input()
   customIndex!: number;
- 
 
 
- checkoutForm = this.formBuilder.group({
-  answer: ''
-});
 
-  constructor(private formBuilder : FormBuilder) { }
+  checkoutForm = this.formBuilder.group({
+    answer: ''
+  });
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
 
-  displayQuestion(index: number): string{
-    
+  displayQuestion(index: number): string {
+
     return QUESTIONS[index].text;
-   
-    }
 
-  
-
-  getValue(value: boolean): boolean{
-
-    return value;
   }
 
+  onSubmit(): void {
 
+    console.log("submitted")
 
-  onSubmit(): void{
-
-      console.log("submitted")
-     
-      QuestionService.values[this.customIndex] = this.checkoutForm.value
+    QuestionService.values[this.customIndex] = this.checkoutForm.value
   }
 
 }

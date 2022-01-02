@@ -3,27 +3,21 @@
     text-align: center;
 }
 
-h3{
-
-   
+h3 {
     color: black;
     border-style: black;
-
 }
-h1{
 
+h1 {
     font-style: italic;
     color: green;
     border-style: black;
-
 }
 
-.container{
-
+.container {
     border: 3px;
     border-style: solid;
     border-color: black;
     padding: 1em;
     margin: 50px 150px 0px 150px;
-
 }

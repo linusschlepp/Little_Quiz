@@ -17,9 +17,7 @@ export class FooterComponent implements OnInit {
   
   checkIfAbout(): boolean {
 
-    return !(QuestionService.lastVisited == '//about');
-
-  
+    return !(QuestionService.lastVisited == "//about");
 
   }
 

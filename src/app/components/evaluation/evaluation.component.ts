@@ -17,65 +17,64 @@ export class EvaluationComponent implements OnInit {
   }
 
 
-  printStuff(list: boolean[]){
-      
+  printStuff(list: boolean[]) {
+
   }
 
-  evaluate(index: number): boolean{
-      
-
-     if( '{"answer":"'+QUESTIONS[index].answer +'"}'== JSON.stringify(QuestionService.values[index]))
-       return true;
-            
-
-        return false;
-      }
-  
-      checkSize(): boolean{
-        
-        if(QuestionService.values.length == 0)
-          return false;
-
-        
-        return true;
-      }
-
-      checkIfEmpty(index: number): boolean{
-
-       
-        
-
-        if(!QuestionService.values[index]){
-          return true;
-        }
-           
-
-          return false;
-
-      }
-        
-      getSize(){
+  evaluate(index: number): boolean {
 
 
-      return QUESTIONS
-      }
-    getAnswer(index: number): string{
-     
-     return JSON.stringify(QUESTIONS[index].answer)
+    if ('{"answer":"' + QUESTIONS[index].answer + '"}' == JSON.stringify(QuestionService.values[index]))
+      return true;
 
+
+    return false;
+  }
+
+  checkSize(): boolean {
+
+    if (QuestionService.values.length == 0)
+      return false;
+
+
+    return true;
+  }
+
+  checkIfEmpty(index: number): boolean {
+
+
+
+
+    if (!QuestionService.values[index]) {
+      return true;
     }
 
-      clear(){
 
-        QuestionService.values = []
-      } 
+    return false;
 
-      setLastVisited(){
-
-        QuestionService.lastVisited = "//evaluation"
-
-      }
   }
+
+  getSize() {
+
+    return QUESTIONS
+  }
+  getAnswer(index: number): string {
+
+    return JSON.stringify(QUESTIONS[index].answer)
+
+  }
+
+  clear() {
+
+    QuestionService.values = []
+  }
+
+  setLastVisited() {
+
+    QuestionService.lastVisited = "//evaluation"
+
+  }
+}
 
 
 

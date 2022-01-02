@@ -10,7 +10,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { HeaderComponent } from './components/header/header.component';
 import { QuestionItemComponent } from './components/question-item/question-item.component';
 import { EvaluationComponent } from './components/evaluation/evaluation.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   
@@ -23,7 +23,6 @@ const appRoutes: Routes = [
 
   
 ];
-
 
 @NgModule({
   declarations: [
