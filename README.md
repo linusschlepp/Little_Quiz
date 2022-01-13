@@ -4,5 +4,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # About
 
-Little Quiz-App, very simple
+Little Quiz-App, which displays five questions and checks the input of the user. It compares the input data to the actual results.  
 
