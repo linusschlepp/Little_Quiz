@@ -11,7 +11,7 @@ import { QUESTIONS } from 'src/app/mock-questions';
 })
 export class EvaluationComponent implements OnInit {
 
-  constructor() { }
+  constructor(questionService: QuestionService) { }
 
   ngOnInit(): void {
   }

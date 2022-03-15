@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { QuestionItemComponent } from './components/question-item/question-item.component';
 import { EvaluationComponent } from './components/evaluation/evaluation.component';
 import {  ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   
@@ -20,8 +21,6 @@ const appRoutes: Routes = [
     {path: 'question-item', component: QuestionItemComponent},
     {path: 'evaluation', component: EvaluationComponent},
     
-
-  
 ];
 
 @NgModule({
@@ -39,7 +38,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule, 
     RouterModule.forRoot(appRoutes, {enableTracing: true} ),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
      
   ],
   providers: [],
