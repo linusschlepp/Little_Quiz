@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Question } from '../question';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ export class QuestionService {
   static values : string[] = []
   static lastVisited : string
   private questionUrl = 'app/questions';
-  private answers : string[] = [];
+  observableAnswers  = new Observable<string[]>();
 
 
   constructor(
@@ -27,13 +28,16 @@ export class QuestionService {
     return this.http.get<Question>(url);
 
   }
-
+  //TODO: Figure out, why this cant be added 
   pushAnswer(answer: string): void {
-    this.answers.push(answer);
+   // this.observableAnswers.pipe(tap(answerList => {
+   //   answerList.push(answer);
+   // }));
+   this.observableAnswers.subscribe(answerList => answerList.push(answer));
   }
 
-  getAnswers(): string[] {
-    return this.answers;
+  getAnswers(): Observable<string[]> {
+    return this.observableAnswers;
   }
 
 addToValue(input : string) {

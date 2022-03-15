@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 import { QuestionComponent } from '../question/question.component';
 import { QUESTIONS } from 'src/app/mock-questions';
+import { Question } from 'src/app/question';
 
 
 @Component({
@@ -11,7 +12,10 @@ import { QUESTIONS } from 'src/app/mock-questions';
 })
 export class EvaluationComponent implements OnInit {
 
-  constructor(questionService: QuestionService) { }
+  questions: Question[] = []
+  answers: string[] = []
+
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +28,17 @@ export class EvaluationComponent implements OnInit {
   evaluate(index: number): boolean {
 
 
-    if ('{"answer":"' + QUESTIONS[index].answer + '"}' == JSON.stringify(QuestionService.values[index]))
+   // if ('{"answer":"' + QUESTIONS[index].answer + '"}' == JSON.stringify(QuestionService.values[index]))
+    //  return true;
+
+
+    this.questionService.getQuestions()
+        .subscribe(question => this.questions = question);
+    this.questionService.getAnswers()
+        .subscribe(answers => this.answers = answers);
+
+    
+    if(this.questions[index].answer == this.answers[index])
       return true;
 
 
@@ -33,7 +47,10 @@ export class EvaluationComponent implements OnInit {
 
   checkSize(): boolean {
 
-    if (QuestionService.values.length == 0)
+   // if (QuestionService.values.length == 0)
+   //   return false;
+   console.log(this.questionService.getAnswers.length);
+    if (this.questionService.getAnswers.length == 0)
       return false;
 
 
@@ -54,9 +71,9 @@ export class EvaluationComponent implements OnInit {
 
   }
 
-  getSize() {
-
-    return QUESTIONS
+  getSize(): Question[]{
+    this.questionService.getQuestions().subscribe(questions => this.questions = questions);
+    return this.questions
   }
   getAnswer(index: number): string {
 
