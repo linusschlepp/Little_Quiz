@@ -3,6 +3,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { QuestionComponent } from '../question/question.component';
 import { QUESTIONS } from 'src/app/mock-questions';
 import { Question } from 'src/app/question';
+import { Answer } from 'src/app/answer';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { Question } from 'src/app/question';
 export class EvaluationComponent implements OnInit {
 
   questions: Question[] = []
-  answers: string[] = []
+  answers: Answer[] = []
+  value: string =""
 
   constructor(private questionService: QuestionService) { }
 
@@ -35,10 +37,10 @@ export class EvaluationComponent implements OnInit {
     this.questionService.getQuestions()
         .subscribe(question => this.questions = question);
     this.questionService.getAnswers()
-        .subscribe(answers => this.answers = answers);
+        .subscribe(answer => this.answers = answer);
 
     
-    if(this.questions[index].answer == this.answers[index])
+    if(this.questions[index].answer == this.answers[index].answerText)
       return true;
 
 
@@ -73,6 +75,7 @@ export class EvaluationComponent implements OnInit {
 
   getSize(): Question[]{
     this.questionService.getQuestions().subscribe(questions => this.questions = questions);
+    console.log("size: "+this.questions)
     return this.questions
   }
   getAnswer(index: number): string {

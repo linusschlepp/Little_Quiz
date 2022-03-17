@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Question } from '../question';
+import { Answer } from '../answer';
 import { tap } from 'rxjs/operators';
 
 
@@ -11,39 +12,54 @@ import { tap } from 'rxjs/operators';
 export class QuestionService {
   static values : string[] = []
   static lastVisited : string
-  private questionUrl = 'app/questions';
-  observableAnswers  = new Observable<string[]>();
+  private answer = {} as Answer;
+  private questionUrl = 'api/questions';
+  private answerUrl = 'api/answer';
+ // observableAnswers  = new Observable<string[]>();
+// observableAnswers = new BehaviorSubject("initial value");
 
 
   constructor(
-    private http: HttpClient
+    private httpQuestion: HttpClient,
+    private httpAnswer: HttpClient
   ) { }
 
   getQuestions(): Observable<Question[]>{
-    return this.http.get<Question[]>(this.questionUrl);
+    return this.httpQuestion.get<Question[]>(this.questionUrl);
   }
 
   getQuestion(id: number): Observable<Question>{
     const url = `${this.questionUrl}/${id}`
-    return this.http.get<Question>(url);
+    return this.httpQuestion.get<Question>(url);
 
   }
   //TODO: Figure out, why this cant be added 
-  pushAnswer(answer: string): void {
+  addAnswer(answer : Answer): Observable<Answer> {
    // this.observableAnswers.pipe(tap(answerList => {
    //   answerList.push(answer);
    // }));
-   this.observableAnswers.subscribe(answerList => answerList.push(answer));
+   // this.observableAnswers.subscribe(answerList => answerList.push(answer));
+
+   
+    console.log("hello")
+   return this.httpAnswer.post<Answer>(this.answerUrl, answer, this.httpOptions);
   }
 
-  getAnswers(): Observable<string[]> {
+/*   getAnswers(): Observable<string[]> {
     return this.observableAnswers;
+  } */
+
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
+
+  getAnswers(): Observable<Answer[]> {
+    //  console.log(this.httpAnswer.get<Answer[]>(this.answerUrl).length)
+      return this.httpAnswer.get<Answer[]>(this.answerUrl)
   }
 
 addToValue(input : string) {
-
   QuestionService.values.push(input);
-
 }
 }
 

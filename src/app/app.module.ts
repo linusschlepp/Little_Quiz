@@ -12,6 +12,8 @@ import { QuestionItemComponent } from './components/question-item/question-item.
 import { EvaluationComponent } from './components/evaluation/evaluation.component';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 const appRoutes: Routes = [
   
@@ -39,7 +41,10 @@ const appRoutes: Routes = [
     BrowserModule, 
     RouterModule.forRoot(appRoutes, {enableTracing: true} ),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    )
      
   ],
   providers: [],
