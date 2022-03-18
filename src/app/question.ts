@@ -1,6 +1,6 @@
 export interface Question{
-    id: number;
-    questionText: string;
-    answer: string;
+    id?: number;
+    questionText?: string;
+    answer?: string;
 
 }

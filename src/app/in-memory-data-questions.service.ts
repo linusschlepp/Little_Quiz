@@ -5,7 +5,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 @Injectable({
   providedIn: 'root'
 })
-export class InMemoryDataService implements InMemoryDbService {
+export class InMemoryDataQuestionsService implements InMemoryDbService {
   createDb(){
     const questions = [
 
@@ -40,7 +40,14 @@ export class InMemoryDataService implements InMemoryDbService {
       }
       
       ];
-      return {questions}
+
+      const answers = [
+        {
+          answerText: ''
+
+        }
+      ];
+      return {questions, answers}
   }
 
   constructor() { }

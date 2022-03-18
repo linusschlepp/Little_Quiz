@@ -14,7 +14,7 @@ export class QuestionService {
   static lastVisited : string
   private answer = {} as Answer;
   private questionUrl = 'api/questions';
-  private answerUrl = 'api/answer';
+  private answerUrl = 'api/answers';
  // observableAnswers  = new Observable<string[]>();
 // observableAnswers = new BehaviorSubject("initial value");
 

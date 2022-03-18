@@ -19,6 +19,8 @@ export class QuestionItemComponent implements OnInit {
   answers: Answer[] = []
   length: number = 0
   @Input()
+  question: string = ""
+  @Input()
   customIndex!: number;
   answerText: string = ""
 
@@ -33,17 +35,14 @@ export class QuestionItemComponent implements OnInit {
   }
 
 
-  displayQuestion(index: number): string {
+  displayQuestion(index: number): string | undefined{
     
-  //  return QUESTIONS[index].text;
-   //return this.questionService.getQuestions().subscribe(questions => this.questions = questions.slice(1,index)).text;
    this.questionService.getQuestions()
         .subscribe(question => this.questions = question);
 
-    return this.questions[index].questionText;
+  return this.question;
 
-
-  }
+}
 
   onSubmit(): void {
 
@@ -51,11 +50,10 @@ export class QuestionItemComponent implements OnInit {
 
     const answerText = this.checkoutForm.value
 
-   // QuestionService.values[this.customIndex] = this.checkoutForm.value
   
-   
-  // this.questionService.getAnswers().subscribe(answers => this.answers = answers)
-   //console.log(this.questionService.getAnswers.length);
+    this.questionService.getAnswers().subscribe(answers => this.answers = answers)
+    console.log(this.answers.length)
+
    this.questionService.addAnswer({answerText} as Answer).
     subscribe(answer => {
       this.answers.push(answer);
