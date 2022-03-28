@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 import { QuestionComponent } from '../question/question.component';
 import { QUESTIONS } from 'src/app/mock-questions';
@@ -16,72 +16,58 @@ export class EvaluationComponent implements OnInit {
   questions: Question[] = []
   answers: Answer[] = []
   value: string =""
+  @Input()
+  answerArray: string[] = []
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
+    this.getSize()
   }
 
 
-  printStuff(list: boolean[]) {
-
-  }
-
+ 
   evaluate(index: number): boolean {
 
-
-   // if ('{"answer":"' + QUESTIONS[index].answer + '"}' == JSON.stringify(QuestionService.values[index]))
-    //  return true;
-
-
-    this.questionService.getQuestions()
-        .subscribe(question => this.questions = question);
-    this.questionService.getAnswers()
-        .subscribe(answer => this.answers = answer);
-
-    console.log("compare")
-    if(this.questions[index].answer == this.answers[index].answerText)
+      try{
+    if('{"answer":"' + this.questions[index].answer + '"}' === this.answers[index+1].answerText)
       return true;
-
+    } catch(e){
+      this.checkIfEmpty(index);
+    }
 
     return false;
   }
 
   checkSize(): boolean {
 
-   // if (QuestionService.values.length == 0)
-   //   return false;
-   /*
-   console.log(this.questionService.getAnswers.length);
-    if (this.questionService.getAnswers.length == 0)
+    if (this.questions.length === 0)
       return false;
-*/
-
+   
+  
+  
     return true;
   }
 
   checkIfEmpty(index: number): boolean {
 
 
-
-
-    if (!QuestionService.values[index]) {
+    if (!this.answers[index+1] || this.answers[index+1] === undefined) 
       return true;
-    }
+    
 
 
     return false;
 
   }
 
-  getSize(): Question[]{
+  getSize(): void{
     this.questionService.getQuestions().subscribe(questions => this.questions = questions);
-    console.log("size: "+this.questions.length)
-    return this.questions
+    this.questionService.getAnswers().subscribe(answer => this.answers = answer);
   }
   getAnswer(index: number): string {
 
-    return JSON.stringify(QUESTIONS[index].answer)
+    return JSON.stringify(this.questions[index].answer)
 
   }
 

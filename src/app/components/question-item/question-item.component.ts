@@ -17,6 +17,8 @@ export class QuestionItemComponent implements OnInit {
 
   questions: Question[] = []
   answers: Answer[] = []
+  answerArray: string[] = []
+  answer1: string = "dasdfdf"
   length: number = 0
   @Input()
   question: string = ""
@@ -32,32 +34,47 @@ export class QuestionItemComponent implements OnInit {
     private questionService : QuestionService) { }
 
   ngOnInit(): void {
+    this.getAnswers();
   }
 
 
-  displayQuestion(index: number): string | undefined{
+  displayQuestion(index: number){
     
    this.questionService.getQuestions()
         .subscribe(question => this.questions = question);
 
   return this.question;
+}
 
+private getAnswers() {
+  this.questionService.getAnswers()
+      .subscribe(answers => this.answers = answers)
 }
 
   onSubmit(): void {
 
     console.log("submitted")
 
-    const answerText = this.checkoutForm.value
+    const answerText = JSON.stringify(this.checkoutForm.value)
+    //const answerText = (Math.random() + 1).toString(36).substring(7);
+  //  const answerText = "hkdjlskjdlfj"
+    
 
   
-    this.questionService.getAnswers().subscribe(answers => this.answers = answers)
-    console.log(this.answers.length)
-
+  //  this.questionService.getAnswers().subscribe(answers => this.answers = answers)
+   // console.log(this.answers.length)
+   console.log(typeof answerText)
+   console.log(answerText)
+  if(!answerText)
+    return;
    this.questionService.addAnswer({answerText} as Answer).
     subscribe(answer => {
       this.answers.push(answer);
     });
+    console.log(this.answers.length)
+    
+
+
   }
 
 }

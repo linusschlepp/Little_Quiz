@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError } from 'rxjs';
 import { Question } from '../question';
 import { Answer } from '../answer';
 import { tap } from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -35,16 +37,21 @@ export class QuestionService {
   }
   //TODO: Figure out, why this cant be added 
   addAnswer(answer : Answer): Observable<Answer> {
-   // this.observableAnswers.pipe(tap(answerList => {
-   //   answerList.push(answer);
-   // }));
-   // this.observableAnswers.subscribe(answerList => answerList.push(answer));
-
-   
-    console.log("hello")
-   return this.httpAnswer.post<Answer>(this.answerUrl, answer, this.httpOptions);
+  
+   return this.httpAnswer.post<Answer>(this.answerUrl, answer, this.httpOptions).pipe(
+     tap((newAnswer: Answer) => console.log(`added answer w/ answer=${newAnswer.answerText}`)),
+     catchError(this.handleError<Answer>('addHero')));
   }
 
+  private handleError<T>(operation = 'operation', result?: T){
+    return (error: any): Observable<T> => {
+      console.error(error);
+      console.log(`${operation} failed: ${error.message}`);
+
+      return of (result as T);
+    };
+    
+  }  
 /*   getAnswers(): Observable<string[]> {
     return this.observableAnswers;
   } */

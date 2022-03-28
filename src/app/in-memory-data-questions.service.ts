@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Answer } from './answer';
 
 
 @Injectable({
@@ -42,13 +43,17 @@ export class InMemoryDataQuestionsService implements InMemoryDbService {
       ];
 
       const answers = [
-        {
-          answerText: ''
-
-        }
+      {
+        id: 1,
+        answerText: ' '
+      }
       ];
       return {questions, answers}
   }
+
+  genId(heroes: Answer[]): number{
+    return heroes.length > 0 ? Math.max(...heroes.map(hero => hero.id)) +1 : 11;
+  } 
 
   constructor() { }
 }

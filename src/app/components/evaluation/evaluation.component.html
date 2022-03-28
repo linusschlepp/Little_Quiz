@@ -1,5 +1,5 @@
 <div *ngIf="checkSize(); else elseBlock1">
-    <div *ngFor="let question of getSize(); let currentElementIndex = index">
+    <div *ngFor="let question of questions; let currentElementIndex = index">
         <div *ngIf="evaluate(currentElementIndex); else elseBlock">
             <p class="right">Congratulations, your {{currentElementIndex+1}}. answer was right</p>
         </div>

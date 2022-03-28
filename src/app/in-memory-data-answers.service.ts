@@ -7,10 +7,10 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataAnswersService implements InMemoryDbService {
   createDb(){
     const answers = [
-        {
-          answerText: 'Banana'
+       {
+          answerText: ' '
 
-        }
+        } 
     ];
     return {answers}
 
