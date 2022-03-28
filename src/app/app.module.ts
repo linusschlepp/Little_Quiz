@@ -13,8 +13,8 @@ import { EvaluationComponent } from './components/evaluation/evaluation.componen
 import {  ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataQuestionsService } from './in-memory-data-questions.service';
-import { InMemoryDataAnswersService } from './in-memory-data-answers.service';
+import { InMemoryDataService } from './in-memory-data.service';
+
 
 const appRoutes: Routes = [
   
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataQuestionsService, 
+      InMemoryDataService, 
       {dataEncapsulation: false} 
       ),
  /*    HttpClientInMemoryWebApiModule.forRoot(

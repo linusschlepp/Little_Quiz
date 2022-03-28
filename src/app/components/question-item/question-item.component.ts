@@ -17,14 +17,13 @@ export class QuestionItemComponent implements OnInit {
 
   questions: Question[] = []
   answers: Answer[] = []
-  answerArray: string[] = []
-  answer1: string = "dasdfdf"
-  length: number = 0
+ 
   @Input()
   question: string = ""
   @Input()
   customIndex!: number;
   answerText: string = ""
+  
 
   checkoutForm = this.formBuilder.group({
     answer: ''
@@ -40,8 +39,7 @@ export class QuestionItemComponent implements OnInit {
 
   displayQuestion(index: number){
     
-   this.questionService.getQuestions()
-        .subscribe(question => this.questions = question);
+  
 
   return this.question;
 }
@@ -49,6 +47,8 @@ export class QuestionItemComponent implements OnInit {
 private getAnswers() {
   this.questionService.getAnswers()
       .subscribe(answers => this.answers = answers)
+      this.questionService.getQuestions()
+      .subscribe(question => this.questions = question);
 }
 
   onSubmit(): void {
@@ -56,16 +56,8 @@ private getAnswers() {
     console.log("submitted")
 
     const answerText = JSON.stringify(this.checkoutForm.value)
-    //const answerText = (Math.random() + 1).toString(36).substring(7);
-  //  const answerText = "hkdjlskjdlfj"
-    
 
-  
-  //  this.questionService.getAnswers().subscribe(answers => this.answers = answers)
-   // console.log(this.answers.length)
-   console.log(typeof answerText)
-   console.log(answerText)
-  if(!answerText)
+   if(!answerText)
     return;
    this.questionService.addAnswer({answerText} as Answer).
     subscribe(answer => {

@@ -6,7 +6,7 @@ import { Answer } from './answer';
 @Injectable({
   providedIn: 'root'
 })
-export class InMemoryDataQuestionsService implements InMemoryDbService {
+export class InMemoryDataService implements InMemoryDbService {
   createDb(){
     const questions = [
 

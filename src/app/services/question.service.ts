@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {  Observable, of } from 'rxjs';
 import { catchError } from 'rxjs';
 import { Question } from '../question';
 import { Answer } from '../answer';
@@ -12,13 +12,9 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class QuestionService {
-  static values : string[] = []
   static lastVisited : string
-  private answer = {} as Answer;
   private questionUrl = 'api/questions';
   private answerUrl = 'api/answers';
- // observableAnswers  = new Observable<string[]>();
-// observableAnswers = new BehaviorSubject("initial value");
 
 
   constructor(
@@ -35,7 +31,7 @@ export class QuestionService {
     return this.httpQuestion.get<Question>(url);
 
   }
-  //TODO: Figure out, why this cant be added 
+  
   addAnswer(answer : Answer): Observable<Answer> {
   
    return this.httpAnswer.post<Answer>(this.answerUrl, answer, this.httpOptions).pipe(
@@ -52,21 +48,26 @@ export class QuestionService {
     };
     
   }  
-/*   getAnswers(): Observable<string[]> {
-    return this.observableAnswers;
-  } */
+
+  deleteAnswer(id: number): Observable<Answer>{
+    const url =  `${this.answerUrl}/${id}`;
+
+    return this.httpAnswer.delete<Answer>(url, this.httpOptions).pipe(
+      tap(_ => console.log(`deleted answer id=${id}`)),
+      catchError(this.handleError<Answer>('delete answer'))
+    );
+  }
+
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
 
   getAnswers(): Observable<Answer[]> {
-    //  console.log(this.httpAnswer.get<Answer[]>(this.answerUrl).length)
+  
       return this.httpAnswer.get<Answer[]>(this.answerUrl)
   }
 
-addToValue(input : string) {
-  QuestionService.values.push(input);
-}
+
 }
 

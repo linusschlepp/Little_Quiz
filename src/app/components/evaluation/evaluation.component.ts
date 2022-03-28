@@ -4,6 +4,7 @@ import { QuestionComponent } from '../question/question.component';
 import { QUESTIONS } from 'src/app/mock-questions';
 import { Question } from 'src/app/question';
 import { Answer } from 'src/app/answer';
+import { observable } from 'rxjs';
 
 
 @Component({
@@ -15,9 +16,8 @@ export class EvaluationComponent implements OnInit {
 
   questions: Question[] = []
   answers: Answer[] = []
-  value: string =""
-  @Input()
-  answerArray: string[] = []
+  
+
 
   constructor(private questionService: QuestionService) { }
 
@@ -41,11 +41,10 @@ export class EvaluationComponent implements OnInit {
 
   checkSize(): boolean {
 
-    if (this.questions.length === 0)
+    if (this.answers.length-1 === 0)
       return false;
    
-  
-  
+
     return true;
   }
 
@@ -55,8 +54,6 @@ export class EvaluationComponent implements OnInit {
     if (!this.answers[index+1] || this.answers[index+1] === undefined) 
       return true;
     
-
-
     return false;
 
   }
@@ -65,6 +62,8 @@ export class EvaluationComponent implements OnInit {
     this.questionService.getQuestions().subscribe(questions => this.questions = questions);
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
   }
+
+
   getAnswer(index: number): string {
 
     return JSON.stringify(this.questions[index].answer)
@@ -73,7 +72,14 @@ export class EvaluationComponent implements OnInit {
 
   clear() {
 
-    QuestionService.values = []
+    for(let i = 1; i < this.answers.length; i+=1){
+      this.questionService.deleteAnswer(this.answers[i].id).subscribe();
+    }
+    this.questionService.getAnswers().subscribe(answer => this.answers = answer);
+    console.log("length" +this.answers.length)
+    
+    
+    
   }
 
   setLastVisited() {
