@@ -21,9 +21,5 @@ export class FooterComponent implements OnInit {
 
   }
 
-  getLastVisited(): string {
-
-    return QuestionService.lastVisited;
-  }
 
 }

@@ -1,10 +1,10 @@
 
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Answer } from 'src/app/answer';
 import { Question } from 'src/app/question';
 import { QuestionService } from 'src/app/services/question.service';
-import { Location } from '@angular/common';
+
 
 
 
@@ -19,10 +19,10 @@ export class QuestionItemComponent implements OnInit {
   answers: Answer[] = []
  
   @Input()
-  question: string = ""
+  question!: string | undefined;
   @Input()
   customIndex!: number;
-  answerText: string = ""
+  answerText: string = "";
   
 
   checkoutForm = this.formBuilder.group({
@@ -32,7 +32,7 @@ export class QuestionItemComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private questionService : QuestionService,
-    private location: Location) { }
+    ) { }
 
   ngOnInit(): void {
     this.getAnswers();

@@ -1,10 +1,7 @@
-import { AfterContentInit, AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component,  OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
-import { QuestionComponent } from '../question/question.component';
-import { QUESTIONS } from 'src/app/mock-questions';
 import { Question } from 'src/app/question';
 import { Answer } from 'src/app/answer';
-import { observable } from 'rxjs';
 import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 
@@ -13,7 +10,7 @@ import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.css']
 })
-export class EvaluationComponent implements OnInit, AfterViewInit, AfterContentChecked {
+export class EvaluationComponent implements OnInit, AfterContentChecked {
 
   questions: Question[] = []
   answers: Answer[] = []
@@ -30,9 +27,7 @@ export class EvaluationComponent implements OnInit, AfterViewInit, AfterContentC
     this.getScore()
   }
 
-  ngAfterViewInit(): void {
 
-  }
 
   ngAfterContentChecked(): void {
       this.cd.detectChanges();

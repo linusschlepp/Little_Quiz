@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { QUESTIONS } from 'src/app/mock-questions';
+import { Component, OnInit } from '@angular/core';
+import { Question } from 'src/app/question';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
@@ -9,25 +9,33 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class QuestionComponent implements OnInit {
 
+  questions: Question[] = [];
+ 
    
-  constructor(questionService: QuestionService) { 
+  constructor(private questionService: QuestionService) { 
     
   }
 
+    
+
+
   ngOnInit(): void {
+    this.intitialize();
   }
 
   getSize() {
 
-  return QUESTIONS;
+  return this.questions;
 
   }
 
-  setLastVisited(){
+ private intitialize(): void {
 
-    QuestionService.lastVisited = "//question"
+    this.questionService.getQuestions()
+      .subscribe(question => this.questions = question);
   }
-  
+
+
 
 }
 

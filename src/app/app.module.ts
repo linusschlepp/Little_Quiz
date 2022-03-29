@@ -47,10 +47,7 @@ const appRoutes: Routes = [
       InMemoryDataService, 
       {dataEncapsulation: false} 
       ),
- /*    HttpClientInMemoryWebApiModule.forRoot(
-        InMemoryDataAnswersService, {
-          dataEncapsulation: false}
-      )  */
+
   ],
   providers: [],
   bootstrap: [AppComponent]
