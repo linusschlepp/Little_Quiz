@@ -13,10 +13,12 @@
             </ng-template>
         </ng-template>
     </div>
+
 </div>
 <ng-template #elseBlock1>
     <p class="notanswered">Pls enter answers!</p>
 </ng-template>
+<p class="score">{{getScore()}}</p>
 <button type="button" routerLink="/" (click)="clear()">
     Start over
-</button> {{setLastVisited()}}
+</button>

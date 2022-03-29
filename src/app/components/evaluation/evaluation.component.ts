@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 import { QuestionComponent } from '../question/question.component';
 import { QUESTIONS } from 'src/app/mock-questions';
 import { Question } from 'src/app/question';
 import { Answer } from 'src/app/answer';
 import { observable } from 'rxjs';
+import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 
 @Component({
@@ -12,17 +13,29 @@ import { observable } from 'rxjs';
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.css']
 })
-export class EvaluationComponent implements OnInit {
+export class EvaluationComponent implements OnInit, AfterViewInit, AfterContentChecked {
 
   questions: Question[] = []
   answers: Answer[] = []
+  trueCounter: number = 0;
   
 
 
-  constructor(private questionService: QuestionService) { }
+  constructor(
+    private questionService: QuestionService,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getSize()
+    this.getScore()
+  }
+
+  ngAfterViewInit(): void {
+
+  }
+
+  ngAfterContentChecked(): void {
+      this.cd.detectChanges();
   }
 
 
@@ -30,8 +43,11 @@ export class EvaluationComponent implements OnInit {
   evaluate(index: number): boolean {
 
       try{
-    if('{"answer":"' + this.questions[index].answer + '"}' === this.answers[index+1].answerText)
+    if('{"answer":"' + this.questions[index].answer + '"}' === this.answers[index+1].answerText){
+        this.trueCounter += 1;
+      console.log(this.trueCounter)
       return true;
+    }
     } catch(e){
       this.checkIfEmpty(index);
     }
@@ -77,16 +93,28 @@ export class EvaluationComponent implements OnInit {
     }
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
     console.log("length" +this.answers.length)
-    
-    
-    
+  
   }
 
-  setLastVisited() {
+  getScore(): string {
 
-    QuestionService.lastVisited = "//evaluation"
-
+    const score = this.trueCounter/this.questions.length;
+ 
+    if(score === 1)
+      return "Legend";
+    else if(score < 1 && score >= 0.8)
+      return "Genius";
+    else if(score < 0.8 && score >= 0.6)
+      return "Intelligent!";
+    else if(score < 0.6 && score >= 0.4)
+      return "Semi Intelligent";
+    else if(score < 0.4 && score >= 0.2)
+      return "Stupid";
+    else
+      return "Bruh";
   }
+
+
 }
 
 

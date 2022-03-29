@@ -1,10 +1,10 @@
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
+
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Answer } from 'src/app/answer';
-import { QUESTIONS } from 'src/app/mock-questions';
 import { Question } from 'src/app/question';
 import { QuestionService } from 'src/app/services/question.service';
+import { Location } from '@angular/common';
 
 
 
@@ -29,8 +29,10 @@ export class QuestionItemComponent implements OnInit {
     answer: ''
   });
 
-  constructor(private formBuilder: FormBuilder, 
-    private questionService : QuestionService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private questionService : QuestionService,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.getAnswers();

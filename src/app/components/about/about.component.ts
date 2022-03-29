@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-about',
@@ -8,19 +9,15 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location : Location) { }
 
   ngOnInit(): void {
   }
 
-  getLastVisited(): string {
+ 
 
-    return QuestionService.lastVisited;
-  }
-
-  setLastVisited(){
-
-    QuestionService.lastVisited = "//about"
+  goBack(): void{
+    this.location.back();
   }
 
 }

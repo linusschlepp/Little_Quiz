@@ -1,19 +1,19 @@
-.right{
-
+.right {
     font-weight: bold;
     background-color: green;
-
 }
 
-.false{
-
+.false {
     font-weight: bold;
     background-color: red;
+}
 
+.score {
+    font-weight: bold;
+    background-color: grey;
 }
 
 button {
-
     height: 50px;
     width: 200px;
     color: white;
@@ -21,18 +21,14 @@ button {
     border-style: double;
     border-color: black;
     margin-top: 50px;
-
 }
-.notanswered {
 
+.notanswered {
     font-weight: bold;
     background-color: yellow;
-
 }
 
 .notansweredquestion {
-
     font-weight: bold;
     background-color: orange;
-
 }
