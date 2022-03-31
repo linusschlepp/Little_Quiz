@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionService } from 'src/app/services/question.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -14,7 +13,7 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
- 
+
 
   goBack(): void{
     this.location.back();

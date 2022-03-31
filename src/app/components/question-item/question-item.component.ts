@@ -46,8 +46,8 @@ export class QuestionItemComponent implements OnInit {
   private getAnswers() {
     this.questionService.getAnswers()
       .subscribe(answers => this.answers = answers)
-    this.questionService.getQuestions()
-      .subscribe(question => this.questions = question);
+    // this.questionService.getQuestions()
+    //   .subscribe(question => this.questions = question);
   }
 
   onSubmit(): void {

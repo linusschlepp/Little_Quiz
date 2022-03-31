@@ -16,14 +16,15 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
 
+
 const appRoutes: Routes = [
-  
+
     {path: '', component: HeaderComponent},
     {path: 'about', component: AboutComponent},
     {path: 'question', component: QuestionComponent},
     {path: 'question-item', component: QuestionItemComponent},
     {path: 'evaluation', component: EvaluationComponent},
-    
+
 ];
 
 @NgModule({
@@ -39,13 +40,13 @@ const appRoutes: Routes = [
     EvaluationComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true} ),
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, 
-      {dataEncapsulation: false} 
+      InMemoryDataService,
+      {dataEncapsulation: false}
       ),
 
   ],

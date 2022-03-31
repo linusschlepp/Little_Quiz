@@ -1,4 +1,4 @@
-import { AfterViewInit, Component,  OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 import { Question } from 'src/app/question';
 import { Answer } from 'src/app/answer';
@@ -15,7 +15,7 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   questions: Question[] = []
   answers: Answer[] = []
   trueCounter: number = 0;
-  
+
 
 
   constructor(
@@ -34,7 +34,7 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   }
 
 
- 
+
   evaluate(index: number): boolean {
 
       try{
@@ -54,7 +54,7 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
     if (this.answers.length-1 === 0)
       return false;
-   
+
 
     return true;
   }
@@ -62,9 +62,9 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   checkIfEmpty(index: number): boolean {
 
 
-    if (!this.answers[index+1] || this.answers[index+1] === undefined) 
+    if (!this.answers[index+1] || this.answers[index+1] === undefined)
       return true;
-    
+
     return false;
 
   }
@@ -88,13 +88,13 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
     }
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
     console.log("length" +this.answers.length)
-  
+
   }
 
   getScore(): string {
 
     const score = this.trueCounter/this.questions.length;
- 
+
     if(score === 1)
       return "Legend";
     else if(score < 1 && score >= 0.8)

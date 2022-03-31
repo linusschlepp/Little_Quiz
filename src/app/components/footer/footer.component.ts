@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
@@ -8,13 +9,14 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class FooterComponent implements OnInit {
 
+  //TODO: Want to add  Location to this component and get rid the lastVisited variable
   constructor() { }
 
   ngOnInit(): void {
   }
 
 
-  
+
   checkIfAbout(): boolean {
 
     return !(QuestionService.lastVisited == "//about");
