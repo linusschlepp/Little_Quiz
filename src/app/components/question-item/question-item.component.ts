@@ -54,14 +54,14 @@ export class QuestionItemComponent implements OnInit {
 
     console.log("submitted")
 
-    const answerText = JSON.stringify(this.checkoutForm.value)
+    const answerText = this.question+JSON.stringify(this.checkoutForm.value)
 
     if (!answerText)
       return;
     this.questionService.addAnswer({answerText} as Answer).subscribe(answer => {
       this.answers.push(answer);
     });
-    console.log(this.answers.length)
+ 
 
 
   }

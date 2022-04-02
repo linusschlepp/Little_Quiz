@@ -36,13 +36,27 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
 
   evaluate(index: number): boolean {
+    try{
+    const answer: Answer = this.answers[index+1];
 
-      try{
-    if('{"answer":"' + this.questions[index].answer + '"}' === this.answers[index+1].answerText){
-        this.trueCounter += 1;
-      console.log(this.trueCounter)
-      return true;
-    }
+  /*   this.answers.forEach( a =>{
+      console.log(a.answerText + " "+ a.id)
+    }); */
+
+
+
+     for(let i = 0; i < this.answers.length; i++){
+       if(answer.answerText === this.questions[i].answerAndQuestion){
+         console.log("Frage id: "+this.questions[i].answerAndQuestion)
+         console.log("Meine Antwort "+answer.answerText)
+         console.log("Richtige Antwort"+this.questions[i].answer)
+        //   if('{"answer":"' + this.questions[i].answer + '"}' === answer.answerText) {
+             this.trueCounter += 1;
+             console.log(this.trueCounter)
+             return true;
+        //   }
+       }
+     }
     } catch(e){
       this.checkIfEmpty(index);
     }
