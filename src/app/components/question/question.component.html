@@ -1,8 +1,5 @@
-<!-- <ng-template let-a [ngTemplateOutletContext]="getSize()"> -->
-<!-- <div *ngVar="getSize(); let variable">-->
-<div *ngFor="let item of getSize(); let currentElementIndex = index">
+<div *ngFor="let item of questions; let currentElementIndex = index">
     <app-question-item [question]="item.questionText" [customIndex]="currentElementIndex">
     </app-question-item>
 </div>
-<!-- </div>-->
-<button type="button" routerLink="/evaluation">Submit your answer and continue </button>
+<button type="button" [routerLink]="['/evaluation']">Submit your answer and continue </button>

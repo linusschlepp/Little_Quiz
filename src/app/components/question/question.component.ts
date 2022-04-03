@@ -22,13 +22,6 @@ export class QuestionComponent implements OnInit {
   }
 
 
-
-  getSize() {
-
-    return this.questions;
-
-  }
-
 private initialize() {
 
   this.questionService.getQuestions()

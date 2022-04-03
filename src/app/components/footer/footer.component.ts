@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
 export class FooterComponent implements OnInit {
 
   //TODO: Want to add  Location to this component and get rid the lastVisited variable
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
 
   checkIfAbout(): boolean {
 
-    return !(QuestionService.lastVisited == "//about");
+    return !(this.location.path(true) === "/about");
 
   }
 

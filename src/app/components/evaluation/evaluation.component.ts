@@ -1,8 +1,9 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  Input,  OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 import { Question } from 'src/app/question';
 import { Answer } from 'src/app/answer';
 import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,16 +16,21 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   questions: Question[] = []
   answers: Answer[] = []
   trueCounter: number = 0;
+  questions1: Question[] = []
 
 
 
   constructor(
     private questionService: QuestionService,
-    private cd: ChangeDetectorRef) { }
+    private cd: ChangeDetectorRef,
+    private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getSize()
     this.getScore()
+    this._route.params.subscribe(params => {
+        this.questions1 = params['questions'];
+    });
   }
 
 
@@ -36,33 +42,31 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
 
   evaluate(index: number): boolean {
+
     try{
     const answer: Answer = this.answers[index+1];
+ /*    const temp = answer.answerText.split("{")[0];
+    this.questions.forEach(question => {
+      if(question.questionText === temp)
+          this.questions1[index].answer = question.answer
+    }) */
 
-  /*   this.answers.forEach( a =>{
-      console.log(a.answerText + " "+ a.id)
-    }); */
-
-
-
-     for(let i = 0; i < this.answers.length; i++){
+     for(let i = 0; i < this.questions.length; i++){
        if(answer.answerText === this.questions[i].answerAndQuestion){
-         console.log("Frage id: "+this.questions[i].answerAndQuestion)
-         console.log("Meine Antwort "+answer.answerText)
-         console.log("Richtige Antwort"+this.questions[i].answer)
-        //   if('{"answer":"' + this.questions[i].answer + '"}' === answer.answerText) {
+         this.questions1[index].answer = this.questions[i].answer;
              this.trueCounter += 1;
              console.log(this.trueCounter)
              return true;
-        //   }
        }
      }
     } catch(e){
       this.checkIfEmpty(index);
     }
 
+   // this.questions1.forEach(e => console.log("question " +e.answer));
     return false;
   }
+
 
   checkSize(): boolean {
 
@@ -97,11 +101,13 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
   clear() {
 
-    for(let i = 1; i < this.answers.length; i+=1){
+    for(let i = 1; i < this.answers.length; i+=1)
       this.questionService.deleteAnswer(this.answers[i].id).subscribe();
-    }
+    
+
+   // this.answers.forEach(answer => this.questionService.deleteAnswer(answer.id).subscribe());
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
-    console.log("length" +this.answers.length)
+    
 
   }
 
