@@ -16,7 +16,7 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   questions: Question[] = []
   answers: Answer[] = []
   trueCounter: number = 0;
-  questions1: Question[] = []
+  questionAnswers: Question[] = []
 
 
 
@@ -28,9 +28,7 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
     this.getSize()
     this.getScore()
-    this._route.params.subscribe(params => {
-        this.questions1 = params['questions'];
-    });
+
   }
 
 
@@ -45,25 +43,27 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
     try{
     const answer: Answer = this.answers[index+1];
- /*    const temp = answer.answerText.split("{")[0];
+
+   const temp = answer.answerText.split("{")[0];
+
     this.questions.forEach(question => {
       if(question.questionText === temp)
-          this.questions1[index].answer = question.answer
-    }) */
+          this.questionAnswers.push(question);
+    });
+
 
      for(let i = 0; i < this.questions.length; i++){
-       if(answer.answerText === this.questions[i].answerAndQuestion){
-         this.questions1[index].answer = this.questions[i].answer;
+       if(answer.answerText == this.questions[i].answerAndQuestion){
              this.trueCounter += 1;
              console.log(this.trueCounter)
              return true;
        }
      }
     } catch(e){
+      console.log(e)
       this.checkIfEmpty(index);
     }
 
-   // this.questions1.forEach(e => console.log("question " +e.answer));
     return false;
   }
 
@@ -95,7 +95,7 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
   getAnswer(index: number): string {
 
-    return JSON.stringify(this.questions[index].answer)
+    return JSON.stringify(this.questionAnswers[index].answer)
 
   }
 
@@ -103,11 +103,11 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
     for(let i = 1; i < this.answers.length; i+=1)
       this.questionService.deleteAnswer(this.answers[i].id).subscribe();
-    
+
 
    // this.answers.forEach(answer => this.questionService.deleteAnswer(answer.id).subscribe());
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
-    
+
 
   }
 
