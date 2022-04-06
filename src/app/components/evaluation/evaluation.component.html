@@ -5,7 +5,7 @@
         </div>
         <ng-template #elseBlock>
             <div *ngIf="checkIfEmpty(currentElementIndex); else elseBlock2 ">
-                <p class="notansweredquestion">You did not answer {{currentElementIndex+1}}. Question</p>
+                <p class="not-answered-single-question">You did not answer {{currentElementIndex+1}}. Question</p>
             </div>
             <ng-template #elseBlock2>
                 <p class="false">Im sorry, but your {{currentElementIndex+1}}. answer was wrong, Correct answer: {{getAnswer(currentElementIndex)}}
@@ -16,31 +16,32 @@
 
 </div>
 <ng-template #elseBlock1>
-    <p class="notanswered">Pls enter answers!</p>
+    <p class="not-answered">Pls enter answers!</p>
 </ng-template>
+<p class="status">Your status:</p>
 <div *ngIf="getScore()===1; else elseBlock0">
-  <p class="score">Legend</p>
+  <p class="legend">Legend</p>
 </div>
 <ng-template #elseBlock0>
   <div *ngIf="getScore() < 1 && getScore() >= 0.8; else elseBlock3">
-    <p class="score">Genius</p>
+    <p class="genius">Genius</p>
   </div>
   <ng-template #elseBlock3>
     <div *ngIf="getScore() < 0.8 && getScore() >= 0.6; else elseBlock4">
-      <p class="score">Intelligent</p>
+      <p class="intelligent">Intelligent</p>
     </div>
     <ng-template #elseBlock4>
       <div *ngIf="getScore() < 0.6 && getScore() >= 0.4; else elseBlock5">
-        <p class="score">Semi Intelligent</p>
+        <p class="semi-intelligent">Semi Intelligent</p>
       </div>
     </ng-template>
     <ng-template #elseBlock5>
       <div *ngIf="getScore() < 0.4 && getScore() >= 0.2; else elseBlock6">
-        <p class="score">Stupid</p>
+        <p class="stupid">Stupid</p>
       </div>
     </ng-template>
     <ng-template #elseBlock6>
-      <p class="score">Bruh</p>
+      <p class="bruh">Bruh</p>
     </ng-template>
   </ng-template>
 

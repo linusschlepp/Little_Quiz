@@ -12,12 +12,12 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./question-item.component.css']
 })
 
-// TODO: elements added to formGroup are still undefinded, try to fix
 export class QuestionItemComponent implements OnInit {
 
   questions: Question[] = []
   answers: Answer[] = []
   checkoutForm!: FormGroup;
+  id: number = 0;
 
   @Input()
   question!: string | undefined;
@@ -38,15 +38,12 @@ export class QuestionItemComponent implements OnInit {
     this.checkoutForm = this.formBuilder.group({
       answer: new FormControl('')
     });
-    this.getId()
   }
 
 
   displayQuestion(index: number) {
 
-   return this.questions[this.getId()-1].questionText;
-
-
+   return this.questions[this.questionService.ranIndeces[this.getId()-1]].questionText;
 
   }
 
@@ -64,7 +61,6 @@ export class QuestionItemComponent implements OnInit {
   }
 
 
-
   clearCheckOut(){
     this.checkoutForm.reset();
   }
@@ -72,7 +68,7 @@ export class QuestionItemComponent implements OnInit {
 
   onSubmit(): void {
 
-    this.question = this.questions[this.getId()-1].questionText;
+    this.question = this.questions[this.questionService.ranIndeces[this.getId()-1]].questionText;
     const answerText = this.question+JSON.stringify(this.checkoutForm.value)
 
 

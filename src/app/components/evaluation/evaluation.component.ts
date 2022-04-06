@@ -102,28 +102,18 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
 
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
+    this.questionService.shuffle();
 
 
   }
 
   getScore(): number {
 
-   // const score = this.trueCounter/this.questions.length;
-
+    console.log("Truecounter" +this.trueCounter)
+    console.log("Länge der Fragen" +this.questions.length)
+    console.log(this.trueCounter/this.questions.length)
     return this.trueCounter/this.questions.length;
 
-    // if(score === 1)
-    //   return "Legend";
-    // else if(score < 1 && score >= 0.8)
-    //   return "Genius";
-    // else if(score < 0.8 && score >= 0.6)
-    //   return "Intelligent!";
-    // else if(score < 0.6 && score >= 0.4)
-    //   return "Semi Intelligent";
-    // else if(score < 0.4 && score >= 0.2)
-    //   return "Stupid";
-    // else
-    //   return "Bruh";
   }
 
 

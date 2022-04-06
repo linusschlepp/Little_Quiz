@@ -23,12 +23,48 @@ button {
     margin-top: 50px;
 }
 
-.notanswered {
+.not-answered {
     font-weight: bold;
     background-color: yellow;
 }
 
-.notansweredquestion {
+.not-answered-single-question {
     font-weight: bold;
     background-color: orange;
+}
+
+.status {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.legend {
+  font-size: 50px;
+  background-color: violet;
+}
+
+.genius {
+  font-size: 40px;
+  background-color: cyan;
+}
+
+.intelligent {
+  font-size: 30px;
+  background-color: purple;
+}
+
+.semi-intelligent {
+  font-size: 20px;
+  background-color: bisque;
+}
+
+.stupid {
+  font-size: 15px;
+  background-color: lightblue;
+}
+
+.bruh {
+  font-size: 10px;
+  background-color: lightblue;
 }

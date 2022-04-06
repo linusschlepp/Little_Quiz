@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {  Observable, of } from 'rxjs';
-import { catchError } from 'rxjs';
-import { Question } from '../question';
-import { Answer } from '../answer';
-import { tap } from 'rxjs/operators';
-
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs';
+import {Question} from '../question';
+import {Answer} from '../answer';
+import {tap} from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,50 +14,50 @@ export class QuestionService {
 
   private questionUrl = 'api/questions';
   private answerUrl = 'api/answers';
-  //TODO: This variable needs to disappear
   static lastVisited: string = "";
-  private ranIndeces: number[] = []
+  ranIndeces: number[] = []
   private number: number = 0
 
 
   constructor(
     private httpQuestion: HttpClient,
     private httpAnswer: HttpClient
-  ) { }
-
-  getQuestions(): Observable<Question[]>{
-    return this.httpQuestion.get<Question[]>(this.questionUrl);
-
-
+  ) {
+    // while (this.ranIndeces.length < 5) {
+    //   const ranIndex = Math.floor(Math.random() * 5);
+    //   if (this.ranIndeces.indexOf(ranIndex) === -1)
+    //     this.ranIndeces.push(ranIndex);
+    // }
+    this.shuffle();
   }
 
+  getQuestions(): Observable<Question[]> {
+    return this.httpQuestion.get<Question[]>(this.questionUrl);
+  }
 
-
-  getQuestion(id: number): Observable<Question>{
+  getQuestion(id: number): Observable<Question> {
     const url = `${this.questionUrl}/${id}`
     return this.httpQuestion.get<Question>(url);
-
   }
 
-  addAnswer(answer : Answer): Observable<Answer> {
+  addAnswer(answer: Answer): Observable<Answer> {
 
-   return this.httpAnswer.post<Answer>(this.answerUrl, answer, this.httpOptions).pipe(
-     tap((newAnswer: Answer) => console.log(`added answer w/ answer=${newAnswer.answerText}`)),
-     catchError(this.handleError<Answer>('addHero')));
+    return this.httpAnswer.post<Answer>(this.answerUrl, answer, this.httpOptions).pipe(
+      tap((newAnswer: Answer) => console.log(`added answer w/ answer=${newAnswer.answerText}`)),
+      catchError(this.handleError<Answer>('addHero')));
   }
 
-  private handleError<T>(operation = 'operation', result?: T){
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       console.log(`${operation} failed: ${error.message}`);
 
-      return of (result as T);
+      return of(result as T);
     };
-
   }
 
-  deleteAnswer(id: number): Observable<Answer>{
-    const url =  `${this.answerUrl}/${id}`;
+  deleteAnswer(id: number): Observable<Answer> {
+    const url = `${this.answerUrl}/${id}`;
 
     return this.httpAnswer.delete<Answer>(url, this.httpOptions).pipe(
       tap(_ => console.log(`deleted answer id=${id}`)),
@@ -66,34 +65,23 @@ export class QuestionService {
     );
   }
 
-
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
 
   getAnswers(): Observable<Answer[]> {
 
-      return this.httpAnswer.get<Answer[]>(this.answerUrl)
+    return this.httpAnswer.get<Answer[]>(this.answerUrl)
   }
 
-  getRanIndex():  number{
-
-    // while(true){
-    //   const ranIndex = Math.floor(Math.random()*5);
-    //   if(!this.ranIndeces.includes(ranIndex)){
-    //     this.ranIndeces.push(ranIndex);
-    //     console.log("ranIndex"+ranIndex)
-    //     return  ranIndex;
-    //   }
-    // }
-
-  console.log("number "+this.number)
-    return this.number++;
-
-
-
+  shuffle(){
+    this.ranIndeces = [];
+    while (this.ranIndeces.length < 5) {
+      const ranIndex = Math.floor(Math.random() * 5);
+      if (this.ranIndeces.indexOf(ranIndex) === -1)
+        this.ranIndeces.push(ranIndex);
+    }
   }
-
 
 }
 
