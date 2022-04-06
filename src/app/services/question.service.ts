@@ -17,6 +17,8 @@ export class QuestionService {
   private answerUrl = 'api/answers';
   //TODO: This variable needs to disappear
   static lastVisited: string = "";
+  private ranIndeces: number[] = []
+  private number: number = 0
 
 
   constructor(
@@ -72,6 +74,24 @@ export class QuestionService {
   getAnswers(): Observable<Answer[]> {
 
       return this.httpAnswer.get<Answer[]>(this.answerUrl)
+  }
+
+  getRanIndex():  number{
+
+    // while(true){
+    //   const ranIndex = Math.floor(Math.random()*5);
+    //   if(!this.ranIndeces.includes(ranIndex)){
+    //     this.ranIndeces.push(ranIndex);
+    //     console.log("ranIndex"+ranIndex)
+    //     return  ranIndex;
+    //   }
+    // }
+
+  console.log("number "+this.number)
+    return this.number++;
+
+
+
   }
 
 

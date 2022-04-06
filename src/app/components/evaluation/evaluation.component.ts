@@ -28,7 +28,6 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
     this.getSize()
     this.getScore()
-
   }
 
 
@@ -42,7 +41,10 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   evaluate(index: number): boolean {
 
     try{
+
+
     const answer: Answer = this.answers[index+1];
+      console.log("Antwort" +answer)
 
    const temp = answer.answerText.split("{")[0];
 
@@ -69,21 +71,15 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
 
   checkSize(): boolean {
+    console.log("lenght of answers"+this.answers.length)
+    return this.answers.length - 1 !== 0;
 
-    if (this.answers.length-1 === 0)
-      return false;
-
-
-    return true;
   }
 
   checkIfEmpty(index: number): boolean {
 
 
-    if (!this.answers[index+1] || this.answers[index+1] === undefined)
-      return true;
-
-    return false;
+    return !this.answers[index + 1] || this.answers[index + 1] === undefined;
 
   }
 
@@ -105,28 +101,29 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
       this.questionService.deleteAnswer(this.answers[i].id).subscribe();
 
 
-   // this.answers.forEach(answer => this.questionService.deleteAnswer(answer.id).subscribe());
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
 
 
   }
 
-  getScore(): string {
+  getScore(): number {
 
-    const score = this.trueCounter/this.questions.length;
+   // const score = this.trueCounter/this.questions.length;
 
-    if(score === 1)
-      return "Legend";
-    else if(score < 1 && score >= 0.8)
-      return "Genius";
-    else if(score < 0.8 && score >= 0.6)
-      return "Intelligent!";
-    else if(score < 0.6 && score >= 0.4)
-      return "Semi Intelligent";
-    else if(score < 0.4 && score >= 0.2)
-      return "Stupid";
-    else
-      return "Bruh";
+    return this.trueCounter/this.questions.length;
+
+    // if(score === 1)
+    //   return "Legend";
+    // else if(score < 1 && score >= 0.8)
+    //   return "Genius";
+    // else if(score < 0.8 && score >= 0.6)
+    //   return "Intelligent!";
+    // else if(score < 0.6 && score >= 0.4)
+    //   return "Semi Intelligent";
+    // else if(score < 0.4 && score >= 0.2)
+    //   return "Stupid";
+    // else
+    //   return "Bruh";
   }
 
 

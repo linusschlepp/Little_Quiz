@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     {path: '', component: HeaderComponent},
     {path: 'about', component: AboutComponent},
     {path: 'question', component: QuestionComponent},
-    {path: 'question-item', component: QuestionItemComponent},
+    {path: 'question-item/:id', component: QuestionItemComponent},
     {path: 'evaluation', component: EvaluationComponent},
 
 ];

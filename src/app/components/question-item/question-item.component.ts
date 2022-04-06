@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Answer} from 'src/app/answer';
 import {Question} from 'src/app/question';
 import {QuestionService} from 'src/app/services/question.service';
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -10,10 +11,13 @@ import {QuestionService} from 'src/app/services/question.service';
   templateUrl: './question-item.component.html',
   styleUrls: ['./question-item.component.css']
 })
+
+// TODO: elements added to formGroup are still undefinded, try to fix
 export class QuestionItemComponent implements OnInit {
 
   questions: Question[] = []
   answers: Answer[] = []
+  checkoutForm!: FormGroup;
 
   @Input()
   question!: string | undefined;
@@ -22,48 +26,68 @@ export class QuestionItemComponent implements OnInit {
   answerText: string = "";
 
 
-  checkoutForm = this.formBuilder.group({
-    answer: ''
-  });
-
   constructor(
     private formBuilder: FormBuilder,
     private questionService: QuestionService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
     this.getAnswers();
+    this.checkoutForm = this.formBuilder.group({
+      answer: new FormControl('')
+    });
+    this.getId()
   }
 
 
   displayQuestion(index: number) {
 
+   return this.questions[this.getId()-1].questionText;
 
-    return this.question;
+
+
   }
 
   private getAnswers() {
     this.questionService.getAnswers()
       .subscribe(answers => this.answers = answers)
-    // this.questionService.getQuestions()
-    //   .subscribe(question => this.questions = question);
+    this.questionService.getQuestions()
+      .subscribe(question => this.questions = question);
   }
+
+  getId(): number {
+
+   return Number(this.route.snapshot.paramMap.get('id'));
+
+  }
+
+
+
+  clearCheckOut(){
+    this.checkoutForm.reset();
+  }
+
 
   onSubmit(): void {
 
-    console.log("submitted")
-
+    this.question = this.questions[this.getId()-1].questionText;
     const answerText = this.question+JSON.stringify(this.checkoutForm.value)
+
 
     if (!answerText)
       return;
     this.questionService.addAnswer({answerText} as Answer).subscribe(answer => {
       this.answers.push(answer);
     });
- 
+
+    console.log("submitted")
+
 
 
   }
+
+
 
 }

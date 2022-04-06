@@ -1,6 +1,15 @@
-<h3>{{customIndex+1}}. Question</h3>
-<p>{{displayQuestion(customIndex)}}</p>
+<h3>{{getId()}}. Question</h3>
+<p>{{displayQuestion(getId()-1)}}</p>
 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-    <label>Enter your Answer please:  </label>
-    <input type="text" placeholder="Enter your Answer" width="250px" height="50px" name="lanswer" id="linput" formControlName="answer" (change)="onSubmit()">
+  <label>Enter your Answer please: </label>
+  <input type="text" placeholder="Enter your Answer" width="250px" height="50px" name="lanswer" id="linput"
+         formControlName="answer" (change)="onSubmit()">
 </form>
+
+<div *ngIf="getId() === 5; else elseBlock">
+  <button type="button" [routerLink]="['/evaluation']">Finish</button>
+</div>
+<ng-template #elseBlock>
+  <button type="button" routerLink="/question-item/{{getId()+1}}" (click)="clearCheckOut()">Submit your answer and continue</button>
+</ng-template>
+

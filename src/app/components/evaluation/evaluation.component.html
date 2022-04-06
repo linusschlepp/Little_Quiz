@@ -18,7 +18,36 @@
 <ng-template #elseBlock1>
     <p class="notanswered">Pls enter answers!</p>
 </ng-template>
-<p class="score">{{getScore()}}</p>
+<div *ngIf="getScore()===1; else elseBlock0">
+  <p class="score">Legend</p>
+</div>
+<ng-template #elseBlock0>
+  <div *ngIf="getScore() < 1 && getScore() >= 0.8; else elseBlock3">
+    <p class="score">Genius</p>
+  </div>
+  <ng-template #elseBlock3>
+    <div *ngIf="getScore() < 0.8 && getScore() >= 0.6; else elseBlock4">
+      <p class="score">Intelligent</p>
+    </div>
+    <ng-template #elseBlock4>
+      <div *ngIf="getScore() < 0.6 && getScore() >= 0.4; else elseBlock5">
+        <p class="score">Semi Intelligent</p>
+      </div>
+    </ng-template>
+    <ng-template #elseBlock5>
+      <div *ngIf="getScore() < 0.4 && getScore() >= 0.2; else elseBlock6">
+        <p class="score">Stupid</p>
+      </div>
+    </ng-template>
+    <ng-template #elseBlock6>
+      <p class="score">Bruh</p>
+    </ng-template>
+  </ng-template>
+
+</ng-template>
+
+
+
 <button type="button" routerLink="/" (click)="clear()">
     Start over
 </button>
