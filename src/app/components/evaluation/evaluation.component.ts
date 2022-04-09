@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.css']
 })
-export class EvaluationComponent implements OnInit, AfterContentChecked {
+export class EvaluationComponent implements OnInit {
 
   questions: Question[] = []
   answers: Answer[] = []
@@ -32,9 +32,9 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
 
 
 
-  ngAfterContentChecked(): void {
-      this.cd.detectChanges();
-  }
+  // ngAfterContentChecked(): void {
+  //     this.cd.detectChanges();
+  // }
 
 
 
@@ -110,9 +110,12 @@ export class EvaluationComponent implements OnInit, AfterContentChecked {
   getScore(): number {
 
     console.log("Truecounter" +this.trueCounter)
-    console.log("Länge der Fragen" +this.questions.length)
+    console.log("Länge der " +this.questions.length)
     console.log(this.trueCounter/this.questions.length)
-    return this.trueCounter/this.questions.length;
+
+    const erg = this.trueCounter/this.questions.length;
+    console.log("erg: "+erg)
+    return erg;
 
   }
 
