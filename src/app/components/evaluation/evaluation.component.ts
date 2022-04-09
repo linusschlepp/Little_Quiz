@@ -2,7 +2,7 @@ import { Component,  Input,  OnInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 import { Question } from 'src/app/question';
 import { Answer } from 'src/app/answer';
-import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -31,20 +31,12 @@ export class EvaluationComponent implements OnInit {
   }
 
 
-
-  // ngAfterContentChecked(): void {
-  //     this.cd.detectChanges();
-  // }
-
-
-
   evaluate(index: number): boolean {
 
     try{
 
 
     const answer: Answer = this.answers[index+1];
-      console.log("Antwort" +answer)
 
    const temp = answer.answerText.split("{")[0];
 
@@ -57,10 +49,11 @@ export class EvaluationComponent implements OnInit {
      for(let i = 0; i < this.questions.length; i++){
        if(answer.answerText == this.questions[i].answerAndQuestion){
              this.trueCounter += 1;
-             console.log(this.trueCounter)
              return true;
        }
      }
+
+
     } catch(e){
       console.log(e)
       this.checkIfEmpty(index);
@@ -71,7 +64,7 @@ export class EvaluationComponent implements OnInit {
 
 
   checkSize(): boolean {
-    console.log("lenght of answers"+this.answers.length)
+
     return this.answers.length - 1 !== 0;
 
   }
@@ -104,19 +97,16 @@ export class EvaluationComponent implements OnInit {
     this.questionService.getAnswers().subscribe(answer => this.answers = answer);
     this.questionService.shuffle();
 
-
   }
 
   getScore(): number {
 
-    console.log("Truecounter" +this.trueCounter)
-    console.log("Länge der " +this.questions.length)
-    console.log(this.trueCounter/this.questions.length)
+    return this.trueCounter/this.getMaxSize();
+  }
 
-    const erg = this.trueCounter/this.questions.length;
-    console.log("erg: "+erg)
-    return erg;
+  getMaxSize(): number {
 
+    return this.questionService.getRanIndeces().length;
   }
 
 

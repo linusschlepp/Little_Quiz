@@ -14,20 +14,18 @@ export class QuestionService {
 
   private questionUrl = 'api/questions';
   private answerUrl = 'api/answers';
-  static lastVisited: string = "";
-  ranIndeces: number[] = []
-  private number: number = 0
+  private ranIndeces: number[] = [];
+  private number: number = 0;
+  private questions: Question[] = [];
+  private length: number = 0;
 
 
   constructor(
     private httpQuestion: HttpClient,
     private httpAnswer: HttpClient
   ) {
-    // while (this.ranIndeces.length < 5) {
-    //   const ranIndex = Math.floor(Math.random() * 5);
-    //   if (this.ranIndeces.indexOf(ranIndex) === -1)
-    //     this.ranIndeces.push(ranIndex);
-    // }
+    this.getQuestions().subscribe(question => this.questions = question);
+    this.length = this.questions.length
     this.shuffle();
   }
 
@@ -74,13 +72,25 @@ export class QuestionService {
     return this.httpAnswer.get<Answer[]>(this.answerUrl)
   }
 
+  getRanIndecesValue(index: number): number {
+
+    return this.ranIndeces[index];
+  }
+
+  // TODO: Make size dynamic
   shuffle(){
+
     this.ranIndeces = [];
     while (this.ranIndeces.length < 5) {
-      const ranIndex = Math.floor(Math.random() * 5);
+      const ranIndex = Math.floor(Math.random() *  10);
       if (this.ranIndeces.indexOf(ranIndex) === -1)
         this.ranIndeces.push(ranIndex);
     }
+  }
+
+  getRanIndeces(): number[] {
+
+    return this.ranIndeces;
   }
 
 }

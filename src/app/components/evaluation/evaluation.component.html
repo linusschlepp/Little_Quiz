@@ -1,5 +1,6 @@
 <div *ngIf="checkSize(); else elseBlock1">
     <div *ngFor="let question of questions; let currentElementIndex = index">
+      <div *ngIf="currentElementIndex < getMaxSize()">
         <div *ngIf="evaluate(currentElementIndex); else elseBlock">
             <p class="right">Congratulations, your {{currentElementIndex+1}}. answer was right</p>
         </div>
@@ -13,17 +14,24 @@
             </ng-template>
         </ng-template>
     </div>
+    </div>
 
 </div>
 <ng-template #elseBlock1>
     <p class="not-answered">Pls enter answers!</p>
 </ng-template>
+
+
 <p class="status">Your status:</p>
+<div *ngIf="getScore() > 1; else elseBlock7">
+
+</div>
+<ng-template #elseBlock7>
 <div *ngIf="getScore()===1; else elseBlock0">
   <p class="legend">Legend</p>
 </div>
 <ng-template #elseBlock0>
-  <div *ngIf="getScore() < 1 && getScore() >= 0.8; else elseBlock3">
+  <div *ngIf="getScore() <= 1 && getScore() >= 0.8; else elseBlock3">
     <p class="genius">Genius</p>
   </div>
   <ng-template #elseBlock3>
@@ -44,6 +52,7 @@
       <p class="bruh">Bruh</p>
     </ng-template>
   </ng-template>
+</ng-template>
 
 </ng-template>
 

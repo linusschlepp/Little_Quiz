@@ -43,7 +43,7 @@ export class QuestionItemComponent implements OnInit {
 
   displayQuestion(index: number) {
 
-   return this.questions[this.questionService.ranIndeces[this.getId()-1]].questionText;
+   return this.questions[this.questionService.getRanIndecesValue(this.getId()-1)].questionText;
 
   }
 
@@ -68,7 +68,7 @@ export class QuestionItemComponent implements OnInit {
 
   onSubmit(): void {
 
-    this.question = this.questions[this.questionService.ranIndeces[this.getId()-1]].questionText;
+    this.question = this.questions[this.questionService.getRanIndecesValue(this.getId()-1)].questionText;
     const answerText = this.question+JSON.stringify(this.checkoutForm.value)
 
 
